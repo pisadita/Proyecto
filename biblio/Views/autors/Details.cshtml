@@ -1,0 +1,36 @@
+﻿@model biblio.Models.autor
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Autor</h4>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <th>
+                    Nombre Autor
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.nombreautor)
+                </td>
+
+            </tr>
+        </table>
+    </div>
+</div>
+
+<p>
+    <button class="btn btn-primary">
+        <i class="glyphicon glyphicon-edit"></i>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.idautor })
+    </button>
+
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>

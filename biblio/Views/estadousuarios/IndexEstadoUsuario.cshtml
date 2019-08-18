@@ -1,0 +1,34 @@
+﻿@model IEnumerable<biblio.Models.estadousuario>
+
+@{
+    ViewBag.Title = "IndexEstadoUsuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>IndexEstadoUsuario</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.estadousuario1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.estadousuario1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idestadousuario }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idestadousuario }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idestadousuario })
+        </td>
+    </tr>
+}
+
+</table>

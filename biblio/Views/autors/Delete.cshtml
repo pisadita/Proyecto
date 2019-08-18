@@ -1,0 +1,40 @@
+﻿@model biblio.Models.autor
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Borrar</h2>
+
+<h3>Esta seguro de borrar este elemento?</h3>
+
+   
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <th>
+                    Nombre Autor
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.nombreautor)
+                </td>
+
+            </tr>
+        </table>
+    </div>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <p>
+        <input type="submit" value="Delete" class="btn btn-default" />
+        @Html.ActionLink("Regresar a Lista", "Index")
+
+    </p>
+            
+        
+    }
+

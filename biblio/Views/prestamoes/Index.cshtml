@@ -1,0 +1,75 @@
+﻿@model IEnumerable<biblio.Models.prestamo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Crear nuevo", "Create")
+</p>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hove">
+        <tr>
+            <th>
+                Fecha prestamo
+            </th>
+            <th>
+                Fecha devolucion
+            </th>
+            <th>
+                Dias
+            </th>
+            <th>
+                Observacion
+            </th>
+            <th>
+                Titulo libro
+            </th>
+            <th>
+                Usuario
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaprestamo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechadevo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ndias)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.observacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.libro.titulolibro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.usuario.nomusuario)
+                </td>
+                <td>
+                    <button class="btn">
+                        <i class="glyphicon glyphicon-file"></i>
+                        @Html.ActionLink("Detalles", "Details", new { id = item.idprestamo })
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="glyphicon glyphicon-edit"></i>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.idprestamo })
+                    </button>
+                    <button class="btn btn-danger">
+                        <i class="glyphicon glyphicon-erase"></i>
+                        @Html.ActionLink("Borrar", "Delete", new { id = item.idprestamo })
+                    </button>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

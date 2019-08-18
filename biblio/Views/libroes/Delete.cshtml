@@ -1,0 +1,64 @@
+﻿@model biblio.Models.libro
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Esta seguro de borrar este elemento?</h3>
+<div>
+    <h4>Libro</h4>
+   
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <th>
+                    Titulo libro
+                </th>
+                <th>
+                    Editorial
+                </th>
+                <th>
+                    Pais
+                </th>
+                <th>
+                    Año
+                </th>
+                <th>
+                    Numero de paginas
+                </th>
+                <th>
+                    Existencia
+                </th>
+                <th>
+                    Fecha ingreso
+                </th>
+                <th>
+                    Nombre autor
+                </th>
+            </tr>
+            <tr>
+                <td>@Html.DisplayFor(model => model.titulolibro)</td>
+                <td>@Html.DisplayFor(model => model.editorial)</td>
+                <td>@Html.DisplayFor(model => model.pais)</td>
+                <td>@Html.DisplayFor(model => model.año)</td>
+                <td>@Html.DisplayFor(model => model.npag)</td>
+                <td>@Html.DisplayFor(model => model.existencia)</td>
+                <td>@Html.DisplayFor(model => model.fechaingreso)</td>
+                <td>@Html.DisplayFor(model => model.autor.nombreautor)</td>
+
+            </tr>
+        </table>
+    </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    <input type="submit" value="Borrar" class="btn btn-default" />
+                    @Html.ActionLink("Regresar a la lista", "Index")
+                </p>
+            }
+    </div>

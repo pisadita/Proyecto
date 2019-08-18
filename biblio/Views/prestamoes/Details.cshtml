@@ -1,0 +1,67 @@
+﻿@model biblio.Models.prestamo
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>prestamo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaprestamo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaprestamo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechadevo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechadevo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ndias)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ndias)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.observacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.observacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.libro.titulolibro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.libro.titulolibro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.apelusuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.apelusuario)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idprestamo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

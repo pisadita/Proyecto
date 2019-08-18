@@ -1,0 +1,75 @@
+﻿@model biblio.Models.usuario
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.edadusuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.edadusuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.apelusuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.apelusuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nomusuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomusuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telusuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telusuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaingreso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaingreso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estadousuario.estadousuario1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estadousuario.estadousuario1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idusuario }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

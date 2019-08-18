@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="libreriaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="autor">
+    <Key>
+      <PropertyRef Name="idautor" />
+    </Key>
+    <Property Name="idautor" Type="int" Nullable="false" />
+    <Property Name="nombreautor" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="estadousuario">
+    <Key>
+      <PropertyRef Name="idestadousuario" />
+    </Key>
+    <Property Name="idestadousuario" Type="int" Nullable="false" />
+    <Property Name="estadousuario" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="libro">
+    <Key>
+      <PropertyRef Name="idlibro" />
+    </Key>
+    <Property Name="idlibro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idautor" Type="int" Nullable="false" />
+    <Property Name="titulolibro" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="editorial" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="pais" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="año" Type="int" Nullable="false" />
+    <Property Name="npag" Type="int" Nullable="false" />
+    <Property Name="existencia" Type="int" Nullable="false" />
+    <Property Name="fechaingreso" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="prestamo">
+    <Key>
+      <PropertyRef Name="idprestamo" />
+    </Key>
+    <Property Name="idprestamo" Type="int" Nullable="false" />
+    <Property Name="idLibro" Type="int" Nullable="false" />
+    <Property Name="idusuario" Type="int" Nullable="false" />
+    <Property Name="fechaprestamo" Type="datetime" Nullable="false" />
+    <Property Name="fechadevo" Type="datetime" Nullable="false" />
+    <Property Name="ndias" Type="int" Nullable="false" />
+    <Property Name="observacion" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="idusuario" />
+    </Key>
+    <Property Name="idusuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idestadousuario" Type="int" Nullable="false" />
+    <Property Name="edadusuario" Type="int" Nullable="false" />
+    <Property Name="apelusuario" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="nomusuario" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="telusuario" Type="int" Nullable="false" />
+    <Property Name="direccion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="fechaingreso" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'libreria.dbo.View_autor_libro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="View_autor_libro">
+    <Key>
+      <PropertyRef Name="nombreautor" />
+      <PropertyRef Name="titulolibro" />
+      <PropertyRef Name="editorial" />
+      <PropertyRef Name="año" />
+      <PropertyRef Name="existencia" />
+    </Key>
+    <Property Name="nombreautor" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="titulolibro" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="editorial" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="año" Type="int" Nullable="false" />
+    <Property Name="existencia" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'libreria.dbo.View_usuario_estado_libro_prestamo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="View_usuario_estado_libro_prestamo">
+    <Key>
+      <PropertyRef Name="nomusuario" />
+      <PropertyRef Name="telusuario" />
+      <PropertyRef Name="estadousuario" />
+      <PropertyRef Name="titulolibro" />
+      <PropertyRef Name="ndias" />
+      <PropertyRef Name="fechaprestamo" />
+      <PropertyRef Name="fechadevo" />
+      <PropertyRef Name="observacion" />
+    </Key>
+    <Property Name="nomusuario" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="telusuario" Type="int" Nullable="false" />
+    <Property Name="estadousuario" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="titulolibro" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ndias" Type="int" Nullable="false" />
+    <Property Name="fechaprestamo" Type="datetime" Nullable="false" />
+    <Property Name="fechadevo" Type="datetime" Nullable="false" />
+    <Property Name="observacion" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_libro_autor">
+    <End Role="autor" Type="Self.autor" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="libro" Type="Self.libro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="autor">
+        <PropertyRef Name="idautor" />
+      </Principal>
+      <Dependent Role="libro">
+        <PropertyRef Name="idautor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_prestamo_libro">
+    <End Role="libro" Type="Self.libro" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="prestamo" Type="Self.prestamo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="libro">
+        <PropertyRef Name="idlibro" />
+      </Principal>
+      <Dependent Role="prestamo">
+        <PropertyRef Name="idLibro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_prestamo_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="prestamo" Type="Self.prestamo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="idusuario" />
+      </Principal>
+      <Dependent Role="prestamo">
+        <PropertyRef Name="idusuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_estadousuario">
+    <End Role="estadousuario" Type="Self.estadousuario" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estadousuario">
+        <PropertyRef Name="idestadousuario" />
+      </Principal>
+      <Dependent Role="usuario">
+        <PropertyRef Name="idestadousuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="libreriaModelStoreContainer">
+    <EntitySet Name="autor" EntityType="Self.autor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="estadousuario" EntityType="Self.estadousuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="libro" EntityType="Self.libro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="prestamo" EntityType="Self.prestamo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="View_autor_libro" EntityType="Self.View_autor_libro" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_autor_libro].[nombreautor] AS [nombreautor], 
+    [View_autor_libro].[titulolibro] AS [titulolibro], 
+    [View_autor_libro].[editorial] AS [editorial], 
+    [View_autor_libro].[año] AS [año], 
+    [View_autor_libro].[existencia] AS [existencia]
+    FROM [dbo].[View_autor_libro] AS [View_autor_libro]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_usuario_estado_libro_prestamo" EntityType="Self.View_usuario_estado_libro_prestamo" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_usuario_estado_libro_prestamo].[nomusuario] AS [nomusuario], 
+    [View_usuario_estado_libro_prestamo].[telusuario] AS [telusuario], 
+    [View_usuario_estado_libro_prestamo].[estadousuario] AS [estadousuario], 
+    [View_usuario_estado_libro_prestamo].[titulolibro] AS [titulolibro], 
+    [View_usuario_estado_libro_prestamo].[ndias] AS [ndias], 
+    [View_usuario_estado_libro_prestamo].[fechaprestamo] AS [fechaprestamo], 
+    [View_usuario_estado_libro_prestamo].[fechadevo] AS [fechadevo], 
+    [View_usuario_estado_libro_prestamo].[observacion] AS [observacion]
+    FROM [dbo].[View_usuario_estado_libro_prestamo] AS [View_usuario_estado_libro_prestamo]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_libro_autor" Association="Self.FK_libro_autor">
+      <End Role="autor" EntitySet="autor" />
+      <End Role="libro" EntitySet="libro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prestamo_libro" Association="Self.FK_prestamo_libro">
+      <End Role="libro" EntitySet="libro" />
+      <End Role="prestamo" EntitySet="prestamo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prestamo_usuario" Association="Self.FK_prestamo_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="prestamo" EntitySet="prestamo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_estadousuario" Association="Self.FK_usuario_estadousuario">
+      <End Role="estadousuario" EntitySet="estadousuario" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

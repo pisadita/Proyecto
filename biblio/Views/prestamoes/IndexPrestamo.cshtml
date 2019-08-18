@@ -1,0 +1,64 @@
+﻿@model IEnumerable<biblio.Models.prestamo>
+
+@{
+    ViewBag.Title = "IndexPrestamo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>IndexPrestamo</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Fecha prestamo
+        </th>
+        <th>
+            Fecha devolucion
+        </th>
+        <th>
+            Dias
+        </th>
+        <th>
+            Observacion
+        </th>
+        <th>
+            Titulo libro
+        </th>
+        <th>
+            Usuario
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaprestamo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechadevo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ndias)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.observacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.libro.titulolibro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usuario.nomusuario)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idprestamo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idprestamo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idprestamo })
+        </td>
+    </tr>
+}
+
+</table>
